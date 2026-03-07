@@ -64,7 +64,7 @@
     max-height: 80px;
   }
 }
-/* Fix hero title and campus row for mobile */
+/* ...existing code... */
 @media (max-width: 600px) {
   #hero h1 {
     font-size: 2.1rem;
@@ -106,13 +106,14 @@
     width: 100%;
     align-items: stretch;
   }
-  .btn-primary, .btn-secondary {
+  .btn-primary,
+  .btn-secondary {
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
   }
 }
-/* Hero campus row responsive */
+/* ...existing code... */
 @media (max-width: 900px) {
   .hero-campus-row {
     gap: 16px;
@@ -147,9 +148,7 @@
     text-align: center;
   }
 }
-/* ============================================================
-   EATS Website — Responsive Styles
-   ============================================================ */
+/* ...existing code... */
 
 @media (max-width: 900px) {
   nav {
@@ -228,7 +227,7 @@
   }
 }
 
-/* Gallery responsive */
+/* ...existing code... */
 @media (max-width: 900px) {
   .photo-gallery {
     grid-template-columns: repeat(2, 1fr);

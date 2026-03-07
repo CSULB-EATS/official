@@ -5,10 +5,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ============================================================
-     Custom Cursor
-     ============================================================ */
-
   const cursor     = document.getElementById('cursor');
   const cursorRing = document.getElementById('cursorRing');
 
@@ -54,21 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-
-  /* ============================================================
-     Nav — Add "scrolled" class after 60px
-     ============================================================ */
-
   const navbar = document.getElementById('navbar');
 
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 60);
   });
-
-
-  /* ============================================================
-     Scroll Reveal
-     ============================================================ */
 
   const revealEls = document.querySelectorAll('.reveal');
 
