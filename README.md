@@ -40,24 +40,6 @@ eats-website/
 
 ## How to Add Photos
 
-### Team Photos
-1. Drop a photo in `images/team/` (e.g. `president.jpg`)
-2. In `index.html`, find the `.team-avatar` for that person
-3. Replace the initials letter with:
-   ```html
-   <img src="images/team/president.jpg" alt="President Name">
-   ```
-
-### Project Photos
-1. Drop a photo in `images/projects/` (e.g. `line-follower.jpg`)
-2. In `index.html`, find the matching `.project-card`
-3. Add this block **before** `.project-tag`:
-   ```html
-   <div class="project-image">
-     <img src="images/projects/line-follower.jpg" alt="Line Follower Robot">
-   </div>
-   ```
-
 ### Company Logos (Alumni Section)
 1. Drop a PNG with transparent background in `images/logos/`
 2. In `index.html`, find an empty `.logo-slot`
