@@ -1,0 +1,55 @@
+/* ============================================================
+   EATS Website v2 — Design Tokens
+   Yellow / White / Black palette
+   ============================================================ */
+
+:root {
+  /* Yellow accent */
+  --yellow:        #F5C400;
+  --yellow-bright: #FFD600;
+  --yellow-dark:   #C9A200;
+  --yellow-dim:    rgba(245, 196, 0, 0.14);
+  --yellow-border: rgba(245, 196, 0, 0.35);
+
+  /* Neutrals — light side */
+  --white:     #FFFFFF;
+  --gray-50:   #FAFAFA;
+  --gray-100:  #F5F5F5;
+  --gray-200:  #E8E8E8;
+  --gray-300:  #D0D0D0;
+  --gray-500:  #888888;
+
+  /* Neutrals — dark side */
+  --gray-800:  #1F1F1F;
+  --gray-900:  #111111;
+  --black:     #0A0A0A;
+
+  /* Semantic */
+  --bg-white:    var(--white);
+  --bg-gray:     var(--gray-100);
+  --bg-dark:     var(--black);
+  --text-primary:   var(--black);
+  --text-secondary: rgba(10, 10, 10, 0.60);
+  --text-muted:     rgba(10, 10, 10, 0.40);
+  --border:         rgba(10, 10, 10, 0.08);
+  --border-strong:  rgba(10, 10, 10, 0.14);
+
+  /* Inverted (dark sections) */
+  --inv-text:   #FFFFFF;
+  --inv-muted:  rgba(255, 255, 255, 0.55);
+  --inv-border: rgba(255, 255, 255, 0.10);
+
+  /* Layout */
+  --nav-h:    68px;
+  --max-w:    1280px;
+  --pad-x:    clamp(20px, 5vw, 80px);
+
+  /* Radii */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+
+  /* Transitions */
+  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-fast:  cubic-bezier(0.4, 0, 0.2, 1);
+}
