@@ -1,4 +1,4 @@
-# EATS Website — Project Structure
+# EATS Website — Project Structure 
 
 ```
 eats-website/
