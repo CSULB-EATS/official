@@ -7,6 +7,7 @@ import { initNav }          from './components/nav.js';
 import { initBoard }        from './components/board.js';
 import { initGallery }      from './components/gallery.js';
 import { initInstagram }    from './components/instagram.js';
+import { initGitHub }       from './components/github.js';
 import {
   initScrollReveal,
   initSmoothScroll,
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initCounters();
   initHeroParallax();
-  // Instagram is async — don't block other init
+  // Async — don't block other init
+  initGitHub();
   initInstagram();
 });
