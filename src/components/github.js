@@ -44,7 +44,7 @@ function renderRepos(container, repos) {
   container.innerHTML = '';
   repos.forEach(repo => {
     const card = document.createElement('a');
-    card.className = 'gh-card reveal';
+    card.className = 'gh-card';
     card.href = repo.html_url;
     card.target = '_blank';
     card.rel = 'noopener';

@@ -1,5 +1,5 @@
 /* ============================================================
-   Photo Gallery — Categorized Slider
+   Photo Gallery — Auto-advancing Slideshow
    ============================================================ */
 
 const PHOTOS = {
@@ -38,9 +38,12 @@ const CATEGORIES = [
   { id: 'history',      label: 'History' },
 ];
 
+const INTERVAL_MS = 4000;
+
 let category = 'all';
 let idx = 0;
 let root = null;
+let timer = null;
 
 function photos() {
   if (category === 'all') {
@@ -54,15 +57,25 @@ function photos() {
   return PHOTOS[category] || [];
 }
 
-function go(delta) {
-  const list = photos();
-  idx = ((idx + delta) + list.length) % list.length;
-  refresh();
-}
-
 function jumpTo(i) {
   idx = i;
   refresh();
+}
+
+function advance() {
+  const list = photos();
+  idx = (idx + 1) % list.length;
+  refresh();
+}
+
+function startTimer() {
+  clearInterval(timer);
+  timer = setInterval(advance, INTERVAL_MS);
+}
+
+function stopTimer() {
+  clearInterval(timer);
+  timer = null;
 }
 
 function refresh() {
@@ -70,11 +83,11 @@ function refresh() {
   const list = photos();
   const photo = list[idx];
 
-  const mainImg   = root.querySelector('.gslide-img');
-  const caption   = root.querySelector('.gslide-caption');
-  const counter   = root.querySelector('.gslide-counter');
-  const thumbs    = root.querySelectorAll('.gslide-thumb');
-  const tabs      = root.querySelectorAll('.gcat-tab');
+  const mainImg = root.querySelector('.gslide-img');
+  const caption = root.querySelector('.gslide-caption');
+  const counter = root.querySelector('.gslide-counter');
+  const thumbs  = root.querySelectorAll('.gslide-thumb');
+  const tabs    = root.querySelectorAll('.gcat-tab');
 
   if (mainImg) {
     mainImg.style.opacity = '0';
@@ -90,7 +103,6 @@ function refresh() {
   thumbs.forEach((th, i) => th.classList.toggle('active', i === idx));
   tabs.forEach(t => t.classList.toggle('active', t.dataset.cat === category));
 
-  // Scroll active thumb into view
   const activeThumb = root.querySelector('.gslide-thumb.active');
   if (activeThumb) {
     activeThumb.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
@@ -108,7 +120,7 @@ function buildThumbs() {
     btn.type = 'button';
     btn.setAttribute('aria-label', photo.caption);
     btn.innerHTML = `<img src="${photo.src}" alt="" loading="lazy">`;
-    btn.addEventListener('click', () => jumpTo(i));
+    btn.addEventListener('click', () => { jumpTo(i); startTimer(); });
     strip.appendChild(btn);
   });
 }
@@ -128,10 +140,6 @@ export function initGallery() {
     </div>
 
     <div class="gslide-wrap">
-      <button class="gslide-btn gslide-prev" type="button" aria-label="Previous photo">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-
       <div class="gslide-stage">
         <img class="gslide-img" src="${first.src}" alt="${first.caption}" loading="eager">
         <div class="gslide-overlay">
@@ -139,10 +147,6 @@ export function initGallery() {
           <div class="gslide-counter">1 / ${list.length}</div>
         </div>
       </div>
-
-      <button class="gslide-btn gslide-next" type="button" aria-label="Next photo">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
     </div>
 
     <div class="gslide-thumbstrip"></div>
@@ -150,23 +154,21 @@ export function initGallery() {
 
   buildThumbs();
 
-  // Category tabs
+  // Category tabs restart the slideshow from photo 0
   root.querySelectorAll('.gcat-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       category = tab.dataset.cat;
       idx = 0;
       buildThumbs();
       refresh();
+      startTimer();
     });
   });
 
-  // Prev / Next buttons
-  root.querySelector('.gslide-prev').addEventListener('click', () => go(-1));
-  root.querySelector('.gslide-next').addEventListener('click', () => go(1));
-
-  // Keyboard navigation
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft')  go(-1);
-    if (e.key === 'ArrowRight') go(1);
-  });
+  // Pause when section is off-screen, resume when visible
+  const observer = new IntersectionObserver(
+    entries => entries[0].isIntersecting ? startTimer() : stopTimer(),
+    { threshold: 0.1 }
+  );
+  observer.observe(root);
 }

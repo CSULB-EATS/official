@@ -475,7 +475,26 @@
   padding: 22px 24px;
   text-decoration: none;
   transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+  animation: gh-card-in 0.55s var(--ease) both;
 }
+
+@keyframes gh-card-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.gh-card:nth-child(1)  { animation-delay: 0ms; }
+.gh-card:nth-child(2)  { animation-delay: 70ms; }
+.gh-card:nth-child(3)  { animation-delay: 140ms; }
+.gh-card:nth-child(4)  { animation-delay: 210ms; }
+.gh-card:nth-child(5)  { animation-delay: 280ms; }
+.gh-card:nth-child(6)  { animation-delay: 350ms; }
+.gh-card:nth-child(7)  { animation-delay: 420ms; }
+.gh-card:nth-child(8)  { animation-delay: 490ms; }
+.gh-card:nth-child(9)  { animation-delay: 560ms; }
+.gh-card:nth-child(10) { animation-delay: 630ms; }
+.gh-card:nth-child(11) { animation-delay: 700ms; }
+.gh-card:nth-child(12) { animation-delay: 770ms; }
 
 .gh-card:hover {
   background: rgba(255,255,255,0.09);
@@ -1470,18 +1489,33 @@ footer {
   position: relative;
 }
 
-/* Advisor group — smaller cards */
+/* Advisor group — same card width as Officers (5-col grid, 3 cards fill left side) */
 .board-group.advisors .board-grid-3 {
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
 }
 
-.board-group.advisors .board-card {
-  grid-column: auto;
+/* Alumni group — circular profile photos */
+.board-group.alumni .board-photo {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  width: 112px;
+  height: 112px;
+  margin: 28px auto 0;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-.board-group.advisors .board-photo {
-  aspect-ratio: 4/5;
+.board-group.alumni .board-photo img.board-photo-img {
+  transform-origin: center center;
+}
+
+.board-group.alumni .board-info {
+  text-align: center;
+}
+
+.board-group.alumni .board-linkedin {
+  justify-content: center;
 }
 
 /* LinkedIn link on cards */
@@ -1595,14 +1629,10 @@ footer {
 
 /* Slider */
 .gslide-wrap {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   margin-bottom: 12px;
 }
 
 .gslide-stage {
-  flex: 1;
   position: relative;
   border-radius: 12px;
   overflow: hidden;
@@ -1640,27 +1670,6 @@ footer {
   letter-spacing: 0.12em;
   color: rgba(255,255,255,0.45);
   margin-top: 4px;
-}
-
-.gslide-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.8);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.2s;
-}
-
-.gslide-btn:hover {
-  background: var(--yellow);
-  border-color: var(--yellow);
-  color: var(--black);
 }
 
 /* Thumbnail strip */
